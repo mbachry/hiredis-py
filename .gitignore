@@ -6,3 +6,4 @@ MANIFEST
 hiredis/version.py
 *.egg-info
 .eggs/
+.tox/
