@@ -18,7 +18,7 @@ ext = Extension("hiredis.hiredis",
   include_dirs=["vendor"])
 
 setup(
-  name="hiredis",
+  name="hiredis-mytest",
   version=version(),
   description="Python wrapper for hiredis",
   long_description=io.open('README.md', 'rt', encoding='utf-8').read(),
