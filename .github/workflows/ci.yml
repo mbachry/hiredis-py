@@ -22,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip wheel
-        pip install tox
+        python -m pip install tox
 
     - name: Run test
       run: |

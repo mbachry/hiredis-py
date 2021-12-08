@@ -11,7 +11,6 @@ jobs:
         # os: [ubuntu-20.04, windows-2019, macos-10.15]
         os: [ubuntu-20.04]
 
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -35,7 +34,6 @@ jobs:
     name: Build source distribution
     runs-on: ubuntu-latest
 
-    if: github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
         with:
@@ -55,14 +53,13 @@ jobs:
   upload_pypi:
     needs: [build_wheels, build_sdist]
     runs-on: ubuntu-latest
-    # upload to PyPI on every tag starting with 'v'
-    if: github.event_name == 'push'
     steps:
       - uses: actions/download-artifact@v2
         with:
           name: artifact
           path: dist
 
+      # upload to Test PyPI on regular commits
       - uses: pypa/gh-action-pypi-publish@v1.4.2
         if: ${{ !startsWith(github.event.ref, 'refs/tags/v') }}
         with:
@@ -71,6 +68,7 @@ jobs:
           repository_url: https://test.pypi.org/legacy/
           skip_existing: true
 
+      # upload to PyPI on every tag starting with 'v'
       - uses: pypa/gh-action-pypi-publish@v1.4.2
         if: ${{ startsWith(github.event.ref, 'refs/tags/v') }}
         with:
