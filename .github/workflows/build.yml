@@ -14,6 +14,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+        with:
+          submodules: recursive
 
       - name: Set up Python
         uses: actions/setup-python@v2
@@ -24,7 +26,6 @@ jobs:
         uses: pypa/cibuildwheel@v2.3.0
         env:
           CIBW_SKIP: 'cp36-*'
-          CIBW_BEFORE_ALL_LINUX: 'yum -y install hiredis-devel'
 
       - uses: actions/upload-artifact@v2
         with:
